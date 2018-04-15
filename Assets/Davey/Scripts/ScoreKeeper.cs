@@ -18,7 +18,7 @@ public class ScoreKeeper : MonoBehaviour {
     public void WinRound() {
         numRoundsWon++;
 
-        for (int i = 0; i < numRoundsWon; i++) {
+        for (int i = 0; i < numRoundsWon && i < 2; i++) {
             transform.GetChild (i).gameObject.SetActive (true);
         }
     }

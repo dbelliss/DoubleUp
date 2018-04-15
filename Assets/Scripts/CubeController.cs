@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeController : MonoBehaviour
 {
     [SerializeField]
-    int playerNum;
+    public int playerNum;
 
     [SerializeField]
     float leftBounds;
@@ -68,6 +68,7 @@ public class CubeController : MonoBehaviour
     [SerializeField]
     bool debugHit = false; // Set to true in editor to test GotHit function
 
+
     // Use this for initialization
     void Start()
     {
@@ -89,7 +90,11 @@ public class CubeController : MonoBehaviour
         {
             Debug.LogError("Error: Player " + playerNum.ToString() + " does not exist");
         }
+
+
     }
+
+
 
     // return 0 if left 1 right 
 
@@ -232,7 +237,7 @@ public class CubeController : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-       
+        Debug.LogError (other.gameObject.name);
         if (other.gameObject.tag == "Shovel") {
             if (pState != PlayerState.BLOCKING) {
                 Debug.Log ("hit");

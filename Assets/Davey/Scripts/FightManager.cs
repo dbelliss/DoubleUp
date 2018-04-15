@@ -52,10 +52,17 @@ public class FightManager : MonoBehaviour {
     [SerializeField]
     GameObject player2;
 
+    [SerializeField]
     private Vector3 player1Start;
+
+    [SerializeField]
     private Vector3 player2Start;
 
     bool hasRoundEnded = false;
+
+    [SerializeField]
+    GameObject[] playerTypes;
+
 
 	// Use this for initialization
 	void Start () {
@@ -65,7 +72,7 @@ public class FightManager : MonoBehaviour {
         }
             
         instance = this;
-
+        CreatePlayers ();
         if (player1 == null || player2 == null) {
             Debug.LogError ("Error: Both players were not set");
             return;
@@ -78,13 +85,28 @@ public class FightManager : MonoBehaviour {
                 flicker.Disable ();
             }
         }
-       
-        player1Start = player1.transform.position;
-        player2Start = player2.transform.position;
+
         SetNextDoubleTime ();
         isDoubleTime = false;
         BeginRound ();
 	}
+
+
+    private void CreatePlayers() {
+
+        Quaternion player1Quat = Quaternion.identity;
+        player1Quat.eulerAngles = new Vector3 (0, 135, 0);
+
+        player1 = Instantiate (playerTypes [(int)GameManager.instance.player1CharacterType], player1Start, player1Quat);
+        player1.GetComponent<CubeController> ().playerNum = 0;
+
+        Quaternion player2Quat = Quaternion.identity;
+        player2Quat.eulerAngles = new Vector3 (0, -135, 0);
+
+        player2 = Instantiate (playerTypes [(int)GameManager.instance.player2CharacterType], player2Start, player2Quat);
+
+        player2.GetComponent<CubeController> ().playerNum = 1;
+    }
 
     void BeginRound() {
         

@@ -17,8 +17,15 @@ public class GameManager : MonoBehaviour {
         Random,
     }
 
-    private CharacterType player1CharacterType;
-    private CharacterType player2CharacterType;
+    public CharacterType player1CharacterType {
+        get;
+        private set;
+    }
+
+    public CharacterType player2CharacterType {
+        get;
+        private set;
+    }
 
     // called first
     void OnEnable()
@@ -36,6 +43,8 @@ public class GameManager : MonoBehaviour {
             DestroyImmediate (this.gameObject);
             return;
         }
+        player1CharacterType = CharacterType.Sean;
+        player2CharacterType = CharacterType.Mystery1;
 	}
         
     // called Call onSceneLoads 
@@ -61,11 +70,17 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SetPlayer1Character(int cType) {
+        if (cType == (int)CharacterType.Random) {
+            cType = Random.Range (0, 2);
+        }
         player1CharacterType = (CharacterType)cType;
         Debug.Log ("Set player one to " + player1CharacterType.ToString ());
     }
 
     public void SetPlayer2Character(int cType) {
+        if (cType == (int)CharacterType.Random) {
+            cType = Random.Range (0, 2);
+        }
         player2CharacterType = (CharacterType)cType;
         Debug.Log ("Set player two to " + player2CharacterType.ToString ());
     }
