@@ -27,6 +27,11 @@ public class CubeController : MonoBehaviour
     int deathHash = Animator.StringToHash("UDeath");
     int restartHash = Animator.StringToHash("Restart");
 
+    AudioSource[] audios;
+
+    const int SWINGSOUND = 2;
+    const int BLOCKSOUND = 1;
+    const int HITSOUND = 0;
 
     // PlayerID 0 and 1
     private int PlayerID
@@ -70,6 +75,7 @@ public class CubeController : MonoBehaviour
         JumpSpeed = 8f;
         animator = GetComponent<Animator>();
 
+        audios = GetComponents<AudioSource> ();
 
         if (playerNum == 0)
         {
@@ -195,6 +201,7 @@ public class CubeController : MonoBehaviour
                 Debug.Log("Jabbing animation");
                 animator.SetTrigger(jabHash);
                 pState = PlayerState.ATTACKING;
+                audios [SWINGSOUND].Play(1);
             }
         }
     }
@@ -226,15 +233,20 @@ public class CubeController : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
        
-        if (other.gameObject.tag == "Shovel" && pState != PlayerState.BLOCKING) {
-            Debug.Log ("hit");
-            GotHit ();
+        if (other.gameObject.tag == "Shovel") {
+            if (pState != PlayerState.BLOCKING) {
+                Debug.Log ("hit");
+                GotHit ();
+            }
+            else {
+                audios [BLOCKSOUND].Play ();
+            }
         }
     }
 
     // Called when a player gets hit
     public void GotHit() {
-
+        audios [HITSOUND].Play ();
         animator.SetTrigger (deathHash);
         if (playerNum == 0) {
             FightManager.instance.WinRound (1);

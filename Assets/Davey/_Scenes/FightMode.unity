@@ -1221,14 +1221,6 @@ Prefab:
       propertyPath: playerNum
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1892547664537212, guid: 4c891ff7ba1484a4eae2216fe08430e6, type: 2}
-      propertyPath: m_TagString
-      value: Shovel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656988618952504, guid: 4c891ff7ba1484a4eae2216fe08430e6, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c891ff7ba1484a4eae2216fe08430e6, type: 2}
   m_IsPrefabParent: 0
