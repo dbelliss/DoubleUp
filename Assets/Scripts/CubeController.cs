@@ -18,12 +18,15 @@ public class CubeController : MonoBehaviour
     Animator animator;
 
     // Animation hash
-    int jumpHash = Animator.StringToHash("Jump");
-    int walkHash = Animator.StringToHash("IsWalking");
-    int idleHash = Animator.StringToHash("IsIdle");
-    int movingForwardHash = Animator.StringToHash("IsMovingForward");
-    int jabHash = Animator.StringToHash("Jab");
-    int blockHash = Animator.StringToHash("Block");
+    int jumpHash = Animator.StringToHash("UJump");
+    int walkHash = Animator.StringToHash("UIsWalking");
+    int idleHash = Animator.StringToHash("UIsIdle");
+    int movingForwardHash = Animator.StringToHash("UIsMovingForward");
+    int jabHash = Animator.StringToHash("UJab");
+    int blockHash = Animator.StringToHash("UBlock");
+    int deathHash = Animator.StringToHash("UDeath");
+    int restartHash = Animator.StringToHash("Restart");
+
 
     // PlayerID 0 and 1
     private int PlayerID
@@ -44,6 +47,7 @@ public class CubeController : MonoBehaviour
         ATTACKING,
         WALKING,
         IDLE,
+        DEAD,
     }
 
     private PlayerState pState = PlayerState.IDLE;
@@ -65,6 +69,7 @@ public class CubeController : MonoBehaviour
         PlayerSpeed = 5f;
         JumpSpeed = 8f;
         animator = GetComponent<Animator>();
+
 
         if (playerNum == 0)
         {
@@ -154,20 +159,24 @@ public class CubeController : MonoBehaviour
     {
         Debug.Log (animator.GetCurrentAnimatorClipInfo (0) [0].clip.name);
         string currentClipName = animator.GetCurrentAnimatorClipInfo (0) [0].clip.name;
-        if (currentClipName != "SIdle" && currentClipName != "Walk") {
+        if (currentClipName != "UpdatedSIdle" && currentClipName != "UpdatedWalk") {
             // Sets bool to true to indicated when the animator returns to idle or walk, the player can take an action again
             Debug.Log ("Beginning action");
             hasBegunAction = true;
-        } else if ((currentClipName == "SIdle" || currentClipName == "Walk") && hasBegunAction && pState != PlayerState.IDLE) {
+        } else if ((currentClipName == "UpdatedSIdle" || currentClipName == "UpdatedWalk") && hasBegunAction && pState != PlayerState.IDLE) {
             // Return to idle to allow more actions only after action has been completed
             Debug.Log ("Reseting action");
             hasBegunAction = false;
             pState = PlayerState.IDLE; // Able to attack or block again
         }
-        CheckMovement ();
-        CheckJump ();
-        CheckAttack ();
-        CheckBlock ();
+
+        if (pState != PlayerState.DEAD) {
+            CheckMovement ();
+            CheckJump ();
+            CheckAttack ();
+            CheckBlock ();
+        }
+       
 
         if (debugHit) {
             debugHit = false;
@@ -212,18 +221,34 @@ public class CubeController : MonoBehaviour
         {
             canJump = true;
         }
-        else if (collision.gameObject.tag == "Shovel") {
+
+    }
+
+    void OnTriggerEnter(Collider other) {
+       
+        if (other.gameObject.tag == "Shovel" && pState != PlayerState.BLOCKING) {
+            Debug.Log ("hit");
             GotHit ();
         }
     }
 
     // Called when a player gets hit
     public void GotHit() {
+
+        animator.SetTrigger (deathHash);
         if (playerNum == 0) {
             FightManager.instance.WinRound (1);
         }
         else {
             FightManager.instance.WinRound(0);
         }
+        pState = PlayerState.DEAD;
+        StartCoroutine(Restart()); // stand back up after a short time
+    }
+
+    IEnumerator Restart() {
+        yield return new WaitForSeconds (2f);
+        animator.SetTrigger (restartHash);
+        pState = PlayerState.IDLE;
     }
 }

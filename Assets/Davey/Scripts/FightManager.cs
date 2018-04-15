@@ -113,6 +113,7 @@ public class FightManager : MonoBehaviour {
             Debug.LogError ("Error: Both players do not have a cube controller");
         }
 
+
         player1Controller.enabled = false;
         player2Controller.enabled = false;
     }
@@ -131,6 +132,9 @@ public class FightManager : MonoBehaviour {
         if (player1Controller == null || player2Controller == null) {
             Debug.LogError ("Error: Both players do not have a cube controller");
         }
+
+
+
 
         player1Controller.enabled = true;
         player2Controller.enabled = true;
@@ -269,6 +273,7 @@ public class FightManager : MonoBehaviour {
     }
 
     private void Win(int playerNum) {
+        readyText.gameObject.SetActive (false);
         winText.gameObject.SetActive (true);
         winText.text = "Player " + (playerNum+1).ToString() + " wins!";
         StartCoroutine (BackToCharacterSelect ());
