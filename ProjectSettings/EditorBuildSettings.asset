@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Davey/_Scenes/MainMenu.unity
+    guid: 8e2dfbf4bdd5e4c1e9ce48aaea416a35
+  - enabled: 1
+    path: Assets/Davey/_Scenes/CharacterSelect.unity
+    guid: 4d2cf1c6af99b4816abe25327abe4156
+  - enabled: 1
+    path: Assets/Davey/_Scenes/FightMode.unity
+    guid: 9b0cf841fc5f5408baafc296505db41f
