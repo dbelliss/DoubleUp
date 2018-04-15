@@ -8,6 +8,7 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     public void ChangeToCharacterSelect() {
+        Debug.Log("Changing to character sekect");
         GameManager.instance.ChangeToCharacterSelect ();
     }
 

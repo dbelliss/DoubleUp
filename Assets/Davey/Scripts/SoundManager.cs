@@ -56,6 +56,11 @@ public class SoundManager : MonoBehaviour {
                 Debug.LogError ("Error: No menu songs");
                 return;
             }
+            if (songSource.clip == MenuSongs[0])
+            {
+                // Already playing menu song
+                return;
+            }
             int songNum = Random.Range (0, MenuSongs.Length);
             songSource.clip = MenuSongs [songNum];
         }

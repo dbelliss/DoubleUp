@@ -100,7 +100,7 @@ public class FightManager : MonoBehaviour {
         if (!isDoubleTime) {
             float timeLeft = nextDoubleTime - Time.time;
 
-            doubleTimeText.text = "Next double time: " + (int)timeLeft;
+            doubleTimeText.text = "2X in: " + (int)timeLeft;
             if (Time.time >= nextDoubleTime) {
                 Time.timeScale = 2;
                 isDoubleTime = true;
@@ -119,7 +119,7 @@ public class FightManager : MonoBehaviour {
             }
             else {
                 // Still in double time
-                doubleTimeText.text = "Double timer: " + (int)timeLeft;
+                doubleTimeText.text = "2X: " + (int)timeLeft;
             }
         }
 

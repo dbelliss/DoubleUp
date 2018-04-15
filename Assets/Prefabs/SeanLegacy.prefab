@@ -508,9 +508,7 @@ GameObject:
   - component: {fileID: 64438884353740506}
   - component: {fileID: 65736560007486536}
   - component: {fileID: 114448747816191740}
-  - component: {fileID: 143685563974514520}
   - component: {fileID: 136731499653132542}
-  - component: {fileID: 114973449703925288}
   m_Layer: 0
   m_Name: SeanLegacy
   m_TagString: Untagged
@@ -3118,7 +3116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1281153709385502}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5.56, z: -11.475}
+  m_LocalPosition: {x: 0, y: 5.56, z: -7.867}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4503095501811370}
@@ -3399,7 +3397,7 @@ MeshCollider:
   m_GameObject: {fileID: 1281153709385502}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -3413,7 +3411,7 @@ BoxCollider:
   m_GameObject: {fileID: 1281153709385502}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3426,7 +3424,7 @@ Animator:
   m_GameObject: {fileID: 1281153709385502}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 07da0e17addcb4ce5b9c34f4d7e2d951, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df11773cb81394652b808f020d89dda9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3445,25 +3443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4626d676e1adf466cbdf89ec9d16a568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114973449703925288
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1281153709385502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.1
 --- !u!136 &136731499653132542
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4348,20 +4327,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0008074641, y: 0.20199263, z: -0.0530511}
     m_Extent: {x: 0.396185, y: 0.3078215, z: 0.31111598}
   m_DirtyAABB: 0
---- !u!143 &143685563974514520
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1281153709385502}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
