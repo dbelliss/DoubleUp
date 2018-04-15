@@ -137,4 +137,4 @@ MonoBehaviour:
   CharacterSelectSongs:
   - {fileID: 8300000, guid: 7fa3057f1881e4586ac8f7629a9fbd0c, type: 3}
   FightSongs:
-  - {fileID: 8300000, guid: f837fca8ab6b9444984d8a4d8a243faf, type: 3}
+  - {fileID: 8300000, guid: 1e3c08e58ed864892bd51ad8b27e9030, type: 3}
