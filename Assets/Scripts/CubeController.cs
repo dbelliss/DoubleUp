@@ -238,7 +238,7 @@ public class CubeController : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
         Debug.LogError (other.gameObject.name);
-        if (other.gameObject.tag == "Shovel") {
+        if (other.gameObject.tag == "Shovel" && pState != PlayerState.DEAD) {
             if (pState != PlayerState.BLOCKING) {
                 Debug.Log ("hit");
                 GotHit ();
