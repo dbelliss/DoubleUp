@@ -11,7 +11,8 @@ public class CubeController : MonoBehaviour
 
     // Animation hash
     int jumpHash = Animator.StringToHash("jump");
-    int walkHash = Animator.StringToHash("");
+    int walkHash = Animator.StringToHash("IsWalking");
+    int idleHash = Animator.StringToHash("IsIdle");
 
     // PlayerID 0 and 1
     private int PlayerID
@@ -45,6 +46,16 @@ public class CubeController : MonoBehaviour
             ? -1 : ((int)Input.GetAxisRaw("Horizontal") > 0) ? 1 : 0;
         Vector3 move = new Vector3(xDirection, 0, 0);
         this.transform.position += move * PlayerSpeed * Time.deltaTime;
+        if(xDirection != 0)
+        {
+            animator.SetBool(idleHash, false);
+            animator.SetBool(walkHash, true);
+        }
+        else
+        {
+            animator.SetBool(idleHash, true);
+            animator.SetBool(walkHash, false);
+        }
     }
 
     void CheckJump()

@@ -252,7 +252,7 @@ ModelImporter:
     4300026: Eye1
     4300028: Eye
     7400000: Jab
-    7400002: Idle
+    7400002: SIdle
     7400004: Block
     7400006: Hit
     7400008: Jump
@@ -338,10 +338,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle
+      name: SIdle
       takeName: Take 001
-      firstFrame: 482
-      lastFrame: 512
+      firstFrame: 481
+      lastFrame: 510
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
