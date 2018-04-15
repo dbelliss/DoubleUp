@@ -27,11 +27,19 @@ public class FightManager : MonoBehaviour {
     [SerializeField]
     Text readyText;
 
+    [SerializeField]
+    Text winText;
+
     public bool isDoubleTime {
         get;
         private set;
     } // True if in double time
 
+    [SerializeField]
+    bool testWinRound1; // For testing, as if player 1 wins
+
+    [SerializeField]
+    bool testWinRound2; // For testing, as in player 2 wins
 
 	// Use this for initialization
 	void Start () {
@@ -115,6 +123,14 @@ public class FightManager : MonoBehaviour {
             }
         }
 
+        if (testWinRound1) {
+            testWinRound1 = false;
+            WinRound (0);
+        }
+        else if (testWinRound2) {
+            testWinRound2 = false;
+            WinRound (1);
+        }
 	}
 
     public void WinRound(int winner) {
@@ -126,12 +142,26 @@ public class FightManager : MonoBehaviour {
             // Player 2 wins
             player2ScoreKeeper.WinRound ();
         }
+        else {
+            Debug.LogError ("Player " + winner.ToString () + " cannot win");
+            return;
+        }
 
+        isDoubleTime = false;
+        Time.timeScale = .5f;
+
+        StartCoroutine (FinishRound ());
+
+    }
+
+    // Go slow motion for a bit before restarting round
+    IEnumerator FinishRound() {
+        yield return new WaitForSeconds (3f);
+        Time.timeScale = 1;
         if (!CheckForVictory ()) {
             BeginRound (); // Being next round if no one has won
         }
     }
-
     // Checks if either player has won
     // returns true if a player has won
     private bool CheckForVictory() {
@@ -149,6 +179,13 @@ public class FightManager : MonoBehaviour {
     }
 
     private void Win(int playerNum) {
-        
+        winText.gameObject.SetActive (true);
+        winText.text = "Player " + (playerNum+1).ToString() + " wins!";
+        StartCoroutine (BackToCharacterSelect ());
+    }
+
+    IEnumerator BackToCharacterSelect() {
+        yield return new WaitForSeconds (3f);
+        GameManager.instance.ChangeToCharacterSelect ();
     }
 }
