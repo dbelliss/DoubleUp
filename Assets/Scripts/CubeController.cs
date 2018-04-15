@@ -55,6 +55,10 @@ public class CubeController : MonoBehaviour
     private bool canJump = true; // True if player can jump, reset to true when landing on "Floor"
     private bool hasBegunAction = false; // True once the player begins attack or block animation
 
+
+    [SerializeField]
+    bool debugHit = false; // Set to true in editor to test GotHit function
+
     // Use this for initialization
     void Start()
     {
@@ -148,25 +152,27 @@ public class CubeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        string currentClipName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-        if (currentClipName != "SIdle" && currentClipName != "Walk")
-        {
+        Debug.Log (animator.GetCurrentAnimatorClipInfo (0) [0].clip.name);
+        string currentClipName = animator.GetCurrentAnimatorClipInfo (0) [0].clip.name;
+        if (currentClipName != "SIdle" && currentClipName != "Walk") {
             // Sets bool to true to indicated when the animator returns to idle or walk, the player can take an action again
-            Debug.Log("Beginning action");
+            Debug.Log ("Beginning action");
             hasBegunAction = true;
-        }
-        else if ((currentClipName == "SIdle" || currentClipName == "Walk") && hasBegunAction && pState != PlayerState.IDLE)
-        {
+        } else if ((currentClipName == "SIdle" || currentClipName == "Walk") && hasBegunAction && pState != PlayerState.IDLE) {
             // Return to idle to allow more actions only after action has been completed
-            Debug.Log("Reseting action");
+            Debug.Log ("Reseting action");
             hasBegunAction = false;
             pState = PlayerState.IDLE; // Able to attack or block again
         }
-        CheckMovement();
-        CheckJump();
-        CheckAttack();
-        CheckBlock();
+        CheckMovement ();
+        CheckJump ();
+        CheckAttack ();
+        CheckBlock ();
+
+        if (debugHit) {
+            debugHit = false;
+            GotHit ();
+        }
     }
 
     void CheckAttack()
@@ -205,6 +211,16 @@ public class CubeController : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             canJump = true;
+        }
+    }
+
+    // Called when a player gets hit
+    public void GotHit() {
+        if (playerNum == 0) {
+            FightManager.instance.WinRound (1);
+        }
+        else {
+            FightManager.instance.WinRound(0);
         }
     }
 }

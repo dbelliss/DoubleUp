@@ -65,7 +65,7 @@ public class SoundManager : MonoBehaviour {
             songSource.clip = MenuSongs [songNum];
         }
         else if (sceneNum == 1) {
-            if (songSource.isPlaying) {
+            if (songSource.clip.name == "Smoke and Gas") {
                 // Came from main menu, do not change song
                 return;
             }
