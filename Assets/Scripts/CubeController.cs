@@ -7,6 +7,11 @@ public class CubeController : MonoBehaviour
 
     private float PlayerSpeed { get; set; }
     private float JumpSpeed { get; set; }
+    Animator animator;
+
+    // Animation hash
+    int jumpHash = Animator.StringToHash("jump");
+    int walkHash = Animator.StringToHash("");
 
     // PlayerID 0 and 1
     private int PlayerID
@@ -28,6 +33,7 @@ public class CubeController : MonoBehaviour
     {
         PlayerSpeed = 5f;
         JumpSpeed = 8f;
+        animator = GetComponent<Animator>();
     }
 
     // return 0 if left 1 right 
@@ -46,6 +52,10 @@ public class CubeController : MonoBehaviour
         int yDirection = Input.GetKeyDown("space") ? 1 : 0;
         Vector3 jump = new Vector3(0, yDirection, 0);
         this.GetComponent<Rigidbody>().AddForce(jump * JumpSpeed, ForceMode.Impulse);
+        if(yDirection == 1)
+        {
+            animator.SetTrigger(jumpHash);
+        }
     }
 
     // Update is called once per frame
