@@ -108,6 +108,15 @@ public class FightManager : MonoBehaviour {
         player2.GetComponent<CubeController> ().playerNum = 1;
     }
 
+    public CubeController GetPlayer1() {
+        return player1.GetComponent<CubeController> ();
+    }
+
+    public CubeController GetPlayer2() {
+        return player2.GetComponent<CubeController> ();
+    }
+
+
     void BeginRound() {
         
         readyText.gameObject.SetActive (false);

@@ -237,8 +237,9 @@ public class CubeController : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
+        
         Debug.LogError (other.gameObject.name);
-        if (other.gameObject.tag == "Shovel" && pState != PlayerState.DEAD) {
+        if (other.gameObject.tag == "Shovel" && pState != PlayerState.DEAD && IsOtherPlayerAttacking()) {
             if (pState != PlayerState.BLOCKING) {
                 Debug.Log ("hit");
                 GotHit ();
@@ -246,6 +247,18 @@ public class CubeController : MonoBehaviour
             else {
                 audios [BLOCKSOUND].Play ();
             }
+        }
+    }
+
+    bool IsOtherPlayerAttacking() {
+        if (playerNum == 0) {
+            return FightManager.instance.GetPlayer2 ().pState == PlayerState.ATTACKING;
+        }
+        else if (playerNum == 1) {
+            return FightManager.instance.GetPlayer1 ().pState == PlayerState.ATTACKING;
+        }
+        else {
+            return false;
         }
     }
 
