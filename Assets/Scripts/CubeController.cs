@@ -212,6 +212,9 @@ public class CubeController : MonoBehaviour
         {
             canJump = true;
         }
+        else if (collision.gameObject.tag == "Shovel") {
+            GotHit ();
+        }
     }
 
     // Called when a player gets hit
